@@ -1,0 +1,675 @@
+/* ==========================================================================
+   CodeAlpha Basic Calculator - Stylesheet
+   Google Dark Theme Accurate Recreation (HTML5 + CSS3)
+   ========================================================================== */
+
+:root {
+  --bg-page: #171717;
+  --bg-card: #202124;
+  --bg-display: #202124;
+  --border-card: #3c4043;
+  --border-display: #3c4043;
+  --border-divider: #5f6368;
+  
+  /* Key Colors */
+  --key-num-bg: #3c4043;
+  --key-num-hover: #484c50;
+  --key-num-active: #5f6368;
+  --key-num-text: #ffffff;
+
+  --key-func-bg: #303134;
+  --key-func-hover: #3c4043;
+  --key-func-active: #4a4d51;
+  --key-func-text: #bdc1c6;
+
+  --key-op-bg: #303134;
+  --key-op-hover: #3c4043;
+  --key-op-active: #4a4d51;
+  --key-op-text: #dadce0;
+
+  --key-equals-bg: #1a73e8;
+  --key-equals-hover: #1967d2;
+  --key-equals-active: #185abc;
+  --key-equals-text: #ffffff;
+
+  --text-main: #e8eaed;
+  --text-muted: #9aa0a6;
+  --text-dim: #70757a;
+  --accent-blue: #8ab4f8;
+  
+  --font-sans: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --radius-card: 12px;
+  --radius-btn: 6px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Header Navbar
+   ========================================================================== */
+.navbar {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 6px;
+  margin-bottom: 12px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  background: linear-gradient(135deg, #1a73e8, #8ab4f8);
+  color: #111;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.nav-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--key-func-bg);
+  border: 1px solid var(--border-card);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: var(--key-num-bg);
+  border-color: var(--border-divider);
+  color: #fff;
+}
+
+/* ==========================================================================
+   Main Calculator Frame
+   ========================================================================== */
+.app-container {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calculator-card {
+  width: 100%;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 18px 20px 14px 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   Display Screen
+   ========================================================================== */
+.display-container {
+  background-color: var(--bg-display);
+  border: 1px solid var(--border-display);
+  border-radius: 8px;
+  padding: 14px 18px 10px 18px;
+  margin-bottom: 16px;
+  min-height: 106px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.display-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.history-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.history-icon-btn:hover {
+  color: #fff;
+  background-color: var(--key-func-bg);
+}
+
+.display-expression {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 400;
+  text-align: right;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-height: 20px;
+}
+
+.display-expression::-webkit-scrollbar {
+  display: none;
+}
+
+.display-main {
+  color: #ffffff;
+  font-size: 44px;
+  font-weight: 400;
+  text-align: right;
+  overflow-x: auto;
+  white-space: nowrap;
+  letter-spacing: -0.5px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-top: 2px;
+}
+
+.display-main::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==========================================================================
+   Keypad Grid (7 Columns x 5 Rows)
+   ========================================================================== */
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.key {
+  height: 44px;
+  font-size: 15px;
+  font-weight: 400;
+  border: 1px solid transparent;
+  border-radius: var(--radius-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.12s ease, transform 0.08s ease, filter 0.12s ease;
+}
+
+.key:active {
+  transform: scale(0.96);
+}
+
+/* Rad / Deg Toggle Pill Group (Row 1, Cols 1-2) */
+.mode-toggle-group {
+  grid-column: span 2;
+  height: 44px;
+  background-color: var(--key-func-bg);
+  border-radius: var(--radius-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 10px;
+}
+
+.mode-btn {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.mode-btn.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.mode-divider {
+  color: var(--border-divider);
+  font-size: 12px;
+}
+
+/* Scientific Function Keys (Dark Gray) */
+.func-key {
+  background-color: var(--key-func-bg);
+  color: var(--key-func-text);
+}
+
+.func-key:hover {
+  background-color: var(--key-func-hover);
+  color: #ffffff;
+}
+
+.func-key:active {
+  background-color: var(--key-func-active);
+}
+
+/* Number Keys (Medium Gray) */
+.num-key {
+  background-color: var(--key-num-bg);
+  color: var(--key-num-text);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.num-key:hover {
+  background-color: var(--key-num-hover);
+}
+
+.num-key:active {
+  background-color: var(--key-num-active);
+}
+
+/* Arithmetic Operator Keys (÷, ×, −, +) */
+.op-key {
+  background-color: var(--key-op-bg);
+  color: var(--key-op-text);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.op-key:hover {
+  background-color: var(--key-op-hover);
+  color: #ffffff;
+}
+
+.op-key:active {
+  background-color: var(--key-op-active);
+}
+
+/* All Clear (AC) Key */
+.clear-key {
+  background-color: var(--key-func-bg);
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.clear-key:hover {
+  background-color: var(--key-func-hover);
+  color: #ff8a80;
+}
+
+/* Equals Key (Vibrant Google Blue) */
+.equals-key {
+  background-color: var(--key-equals-bg);
+  color: var(--key-equals-text);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.equals-key:hover {
+  background-color: var(--key-equals-hover);
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.4);
+}
+
+.equals-key:active {
+  background-color: var(--key-equals-active);
+}
+
+/* ==========================================================================
+   Bottom Bar / Maths Solver
+   ========================================================================== */
+.calculator-footer {
+  margin-top: 14px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.solver-pill {
+  background-color: var(--key-func-bg);
+  border: 1px solid var(--border-card);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.solver-pill:hover {
+  background-color: var(--key-num-bg);
+  border-color: var(--border-divider);
+  color: #fff;
+}
+
+.brand-subtext {
+  position: absolute;
+  right: 0;
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   Modals (History, C Code, Solver Info)
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.open {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  animation: modalSlide 0.22s ease-out;
+}
+
+.code-modal-card {
+  max-width: 680px;
+}
+
+@keyframes modalSlide {
+  from {
+    transform: translateY(16px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-btn {
+  background-color: var(--key-func-bg);
+  border: 1px solid var(--border-card);
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-btn:hover {
+  background-color: var(--key-num-bg);
+  color: #fff;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.15s;
+}
+
+.modal-close:hover {
+  color: #fff;
+}
+
+.modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+  font-size: 14px;
+}
+
+.empty-notice {
+  color: var(--text-dim);
+  text-align: center;
+  padding: 30px 0;
+  font-style: italic;
+}
+
+/* History Item Entry */
+.history-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.history-item:hover {
+  background-color: var(--key-func-bg);
+}
+
+.history-exp {
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: right;
+}
+
+.history-res {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Code Snippet Pre Block */
+.code-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.code-snippet {
+  background-color: #121212;
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #8ab4f8;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* Shortcuts & Info Content */
+.info-content h4 {
+  color: var(--accent-blue);
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.info-content h4:first-child {
+  margin-top: 0;
+}
+
+.info-content p {
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.shortcuts-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.shortcuts-list li {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+kbd {
+  background-color: var(--key-num-bg);
+  border: 1px solid var(--border-card);
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 640px) {
+  body {
+    padding: 8px;
+  }
+
+  .navbar {
+    padding: 8px 4px;
+    margin-bottom: 8px;
+  }
+
+  .calculator-card {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .display-container {
+    padding: 10px 14px;
+    min-height: 90px;
+    margin-bottom: 10px;
+  }
+
+  .display-main {
+    font-size: 32px;
+  }
+
+  .keypad-grid {
+    gap: 5px;
+  }
+
+  .key {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .num-key, .op-key, .equals-key {
+    font-size: 16px;
+  }
+
+  .mode-toggle-group {
+    height: 40px;
+    gap: 4px;
+  }
+
+  .brand-subtext {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .key {
+    height: 38px;
+    font-size: 12px;
+  }
+
+  .num-key, .op-key, .equals-key {
+    font-size: 15px;
+  }
+
+  .nav-title {
+    display: none;
+  }
+}

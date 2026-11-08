@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Calculator | CodeAlpha Internship Task 1</title>
+  <meta name="description" content="A modern, high-precision basic and scientific calculator built for CodeAlpha C Programming & Web Internship.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <span class="badge">CodeAlpha</span>
+      <span class="nav-title">Task 1: Basic Calculator</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn" id="viewCodeBtn" title="View C Program Source">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <span>C Source</span>
+      </button>
+      <button class="nav-btn" id="historyToggleBtn" title="Calculation History">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>History</span>
+      </button>
+      <a href="https://github.com/vishnuvardhanvishnuvardhan09-create/CodeAlpha_BasicCalculator" target="_blank" rel="noopener noreferrer" class="nav-btn github-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Calculator Container -->
+  <main class="app-container">
+    <div class="calculator-card">
+      
+      <!-- Calculator Display -->
+      <div class="display-container">
+        <div class="display-top">
+          <button class="history-icon-btn" id="openHistoryMini" title="Show Calculation History">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+              <polyline points="3 3 3 8 8 8"></polyline>
+              <polyline points="12 7 12 12 15 15"></polyline>
+            </svg>
+          </button>
+          <div class="display-expression" id="displayExpression">Ans = 0</div>
+        </div>
+        <div class="display-main" id="displayMain">0</div>
+      </div>
+
+      <!-- Keypad Grid (Google Style Layout - 7 Columns x 5 Rows) -->
+      <div class="keypad-grid">
+        
+        <!-- Row 1 (Cols 1-2 span, 3, 4, 5, 6, 7) -->
+        <div class="mode-toggle-group span-2">
+          <button class="mode-btn active" id="degBtn" data-mode="deg">Deg</button>
+          <span class="mode-divider">|</span>
+          <button class="mode-btn" id="radBtn" data-mode="rad">Rad</button>
+        </div>
+        <button class="key func-key" data-action="factorial">x!</button>
+        <button class="key func-key" data-char="(">(</button>
+        <button class="key func-key" data-char=")">)</button>
+        <button class="key func-key" data-action="percent">%</button>
+        <button class="key action-key clear-key" data-action="clear">AC</button>
+
+        <!-- Row 2 -->
+        <button class="key func-key" id="invBtn" data-action="inverse">Inv</button>
+        <button class="key func-key" data-func="sin">sin</button>
+        <button class="key func-key" data-func="ln">ln</button>
+        <button class="key num-key" data-char="7">7</button>
+        <button class="key num-key" data-char="8">8</button>
+        <button class="key num-key" data-char="9">9</button>
+        <button class="key op-key" data-op="÷">÷</button>
+
+        <!-- Row 3 -->
+        <button class="key func-key" data-char="π">π</button>
+        <button class="key func-key" data-func="cos">cos</button>
+        <button class="key func-key" data-func="log">log</button>
+        <button class="key num-key" data-char="4">4</button>
+        <button class="key num-key" data-char="5">5</button>
+        <button class="key num-key" data-char="6">6</button>
+        <button class="key op-key" data-op="×">×</button>
+
+        <!-- Row 4 -->
+        <button class="key func-key" data-char="e">e</button>
+        <button class="key func-key" data-func="tan">tan</button>
+        <button class="key func-key" data-func="sqrt">√</button>
+        <button class="key num-key" data-char="1">1</button>
+        <button class="key num-key" data-char="2">2</button>
+        <button class="key num-key" data-char="3">3</button>
+        <button class="key op-key" data-op="−">−</button>
+
+        <!-- Row 5 -->
+        <button class="key func-key" data-action="ans">Ans</button>
+        <button class="key func-key" data-action="exp">EXP</button>
+        <button class="key func-key" data-op="^">xʸ</button>
+        <button class="key num-key" data-char="0">0</button>
+        <button class="key num-key" data-char=".">.</button>
+        <button class="key equals-key" data-action="calculate">=</button>
+        <button class="key op-key" data-op="+">+</button>
+
+      </div>
+
+      <!-- Bottom Helper / Math solver bar -->
+      <div class="calculator-footer">
+        <button class="solver-pill" id="openInfoBtn">
+          <span>Maths Solver & Info</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+        <span class="brand-subtext">CodeAlpha Internship • Task 1</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- History Drawer Modal -->
+  <div class="modal-backdrop" id="historyModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Calculation History</h3>
+        <div class="modal-actions">
+          <button class="modal-btn clear-history-btn" id="clearHistoryBtn">Clear</button>
+          <button class="modal-close" id="closeHistoryBtn">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" id="historyList">
+        <p class="empty-notice">No calculation history yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- C Source Code Modal -->
+  <div class="modal-backdrop" id="codeModal">
+    <div class="modal-card code-modal-card">
+      <div class="modal-header">
+        <h3>Task 1: C Source Code (main.c)</h3>
+        <button class="modal-close" id="closeCodeBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="code-subtitle">Official CodeAlpha C Programming Solution utilizing <code>switch-case</code> for operation selection:</p>
+        <pre class="code-snippet"><code>/*
+ * ============================================================================
+ * Project: Basic Calculator Program
+ * Organization: CodeAlpha Internship
+ * Domain: C Programming (Task 1)
+ * ============================================================================
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void) {
+    int choice;
+    double num1, num2, result;
+    char continueCalc = 'y';
+
+    do {
+        printf("\n1. Addition (+)\n2. Subtraction (-)\n3. Multiplication (*)\n4. Division (/)\n5. Modulus (%%)\n6. Exit\n");
+        printf("Enter your choice (1-6): ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: // Addition
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                printf("Result: %.2lf + %.2lf = %.2lf\n", num1, num2, num1 + num2);
+                break;
+            case 2: // Subtraction
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                printf("Result: %.2lf - %.2lf = %.2lf\n", num1, num2, num1 - num2);
+                break;
+            case 3: // Multiplication
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                printf("Result: %.2lf * %.2lf = %.2lf\n", num1, num2, num1 * num2);
+                break;
+            case 4: // Division
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                if (num2 != 0)
+                    printf("Result: %.2lf / %.2lf = %.2lf\n", num1, num2, num1 / num2);
+                else
+                    printf("Error: Division by zero is undefined!\n");
+                break;
+            case 5: // Modulus
+                printf("Enter two integers: ");
+                int a, b;
+                scanf("%d %d", &a, &b);
+                if (b != 0)
+                    printf("Result: %d %% %d = %d\n", a, b, a % b);
+                else
+                    printf("Error: Modulo by zero!\n");
+                break;
+            case 6:
+                printf("Goodbye!\n");
+                return 0;
+            default:
+                printf("Invalid choice!\n");
+        }
+    } while (continueCalc == 'y' || continueCalc == 'Y');
+
+    return 0;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info / Math Solver Modal -->
+  <div class="modal-backdrop" id="infoModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>About This Project</h3>
+        <button class="modal-close" id="closeInfoBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-content">
+          <h4>CodeAlpha Internship - Task 1</h4>
+          <p><strong>Requirement:</strong> Write a program to perform basic arithmetic operations (Addition, Subtraction, Multiplication & Division) using <code>switch-case</code> for operation selection.</p>
+          
+          <h4>Keyboard Shortcuts:</h4>
+          <ul class="shortcuts-list">
+            <li><span><kbd>0</kbd>–<kbd>9</kbd></span> Number input</li>
+            <li><span><kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd></span> Basic arithmetic operators</li>
+            <li><span><kbd>Enter</kbd> or <kbd>=</kbd></span> Evaluate calculation</li>
+            <li><span><kbd>Esc</kbd></span> All Clear (AC)</li>
+            <li><span><kbd>Backspace</kbd></span> Delete last entered character</li>
+            <li><span><kbd>%</kbd></span> Percentage operation</li>
+          </ul>
+
+          <h4>Submission Guidelines:</h4>
+          <p>Upload source code to GitHub as <code>CodeAlpha_BasicCalculator</code>, deploy live demo on Vercel, and share a video explanation on LinkedIn tagging <strong>@CodeAlpha</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

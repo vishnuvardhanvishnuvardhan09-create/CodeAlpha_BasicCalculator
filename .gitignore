@@ -1,0 +1,17 @@
+# Binaries & executables
+*.exe
+*.out
+*.o
+*.obj
+calculator
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Vercel
+.vercel/
